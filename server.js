@@ -25,6 +25,7 @@ require('./config/passport');
 
 var app = express();
 
+
 mongoose.connect('mongodb://localhost/test');
 
 mongoose.connection.on('error', function () {
