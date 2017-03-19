@@ -25,26 +25,30 @@ require('./config/passport');
 
 var app = express();
 
+mongoose.connect('mongodb://localhost/test');
 
-mongoose.connect(process.env.MONGODB);
-mongoose.connection.on('error', function() {
-  console.log('MongoDB Connection Error. Please make sure that MongoDB is running.');
-  process.exit(1);
+mongoose.connection.on('error', function () {
+    throw ('MongoDB Connection Error. Please make sure that MongoDB is running.');
+    process.exit(1);
+});
+
+mongoose.connection.on('open', function () {
+    console.log('MongoDB Connection Success');
 });
 
 var hbs = exphbs.create({
-  defaultLayout: 'main',
-  helpers: {
-    ifeq: function(a, b, options) {
-      if (a === b) {
-        return options.fn(this);
-      }
-      return options.inverse(this);
-    },
-    toJSON : function(object) {
-      return JSON.stringify(object);
+    defaultLayout: 'main',
+    helpers: {
+        ifeq: function (a, b, options) {
+            if (a === b) {
+                return options.fn(this);
+            }
+            return options.inverse(this);
+        },
+        toJSON: function (object) {
+            return JSON.stringify(object);
+        }
     }
-  }
 });
 
 app.engine('handlebars', hbs.engine);
@@ -53,16 +57,16 @@ app.set('port', process.env.PORT || 3000);
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(session({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(function(req, res, next) {
-  res.locals.user = req.user;
-  next();
+app.use(function (req, res, next) {
+    res.locals.user = req.user;
+    next();
 });
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -82,8 +86,11 @@ app.get('/reset/:token', userController.resetGet);
 app.post('/reset/:token', userController.resetPost);
 app.get('/logout', userController.logout);
 app.get('/unlink/:provider', userController.ensureAuthenticated, userController.unlink);
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/login' }));
+app.get('/auth/facebook', passport.authenticate('facebook', {scope: ['email', 'user_location']}));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+    successRedirect: '/',
+    failureRedirect: '/login'
+}));
 // app.get('/auth/google', passport.authenticate('google', { scope: 'profile email' }));
 // app.get('/auth/google/callback', passport.authenticate('google', { successRedirect: '/', failureRedirect: '/login' }));
 // app.get('/auth/twitter', passport.authenticate('twitter'));
@@ -91,16 +98,25 @@ app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRe
 // app.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email profile repo' ] }));
 // app.get('/auth/github/callback', passport.authenticate('github', { successRedirect: '/', failureRedirect: '/login' }));
 
+//TODO gérer les authentifications
+
+app.get('/get-data',HomeController.get_data);
+app.post('/post-data',HomeController.post_data);
+app.post('/update-data',HomeController.update_data);
+app.post('/delete-data',HomeController.delete_data);
+
 // Production error handler
 if (app.get('env') === 'production') {
-  app.use(function(err, req, res, next) {
-    console.error(err.stack);
-    res.sendStatus(err.status || 500);
-  });
+    app.use(function (err, req, res, next) {
+        console.error(err.stack);
+        res.sendStatus(err.status || 500);
+    });
 }
 
-app.listen(app.get('port'), function() {
-  console.log('Express server listening on port ' + app.get('port'));
+app.listen(app.get('port'), function () {
+    console.log('Express server listening on port ' + app.get('port'));
 });
+
+//TODO gerer fermeture de connection à la base de données
 
 module.exports = app;

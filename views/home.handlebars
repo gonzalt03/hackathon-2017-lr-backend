@@ -1,58 +1,134 @@
 <div class="container-fluid">
-  {{#if messages.success}}
-    <div role="alert" class="alert alert-success">
-      {{#each messages.success}}
-        <div>{{msg}}</div>
-      {{/each}}
-    </div>
-  {{/if}}
-  {{#if messages.error}}
-    <div role="alert" class="alert alert-danger">
-      {{#each messages.error}}
-        <div>{{msg}}</div>
-      {{/each}}
-    </div>
-  {{/if}}
-  {{#if messages.info}}
-    <div role="alert" class="alert alert-info">
-      {{#each messages.info}}
-        <div>{{msg}}</div>
-      {{/each}}
-    </div>
-  {{/if}}
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="panel">
-        <div class="panel-body">
-          <h3>Heading</h3>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-            Donec sed odio dui.</p>
-          <a href="#" role="button" class="btn btn-default">View details</a>
+    {{#if messages.success}}
+        <div role="alert" class="alert alert-success">
+            {{#each messages.success}}
+                <div>{{msg}}</div>
+            {{/each}}
         </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel">
-        <div class="panel-body">
-          <h3>Heading</h3>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-            Donec sed odio dui.</p>
-          <a href="#" role="button" class="btn btn-default">View details</a>
+    {{/if}}
+    {{#if messages.error}}
+        <div role="alert" class="alert alert-danger">
+            {{#each messages.error}}
+                <div>{{msg}}</div>
+            {{/each}}
         </div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="panel">
-        <div class="panel-body">
-          <h3>Heading</h3>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris
-            condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod.
-            Donec sed odio dui.</p>
-          <a href="#" role="button" class="btn btn-default">View details</a>
+    {{/if}}
+    {{#if messages.info}}
+        <div role="alert" class="alert alert-info">
+            {{#each messages.info}}
+                <div>{{msg}}</div>
+            {{/each}}
         </div>
-      </div>
+    {{/if}}
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-1"><h3>GET</h3></div>
+                        <div class="col-sm-3 col-sm-offset-1"><a href="/get-data" role="button" class="btn btn-default">Get
+                            datas</a></div>
+                    </div>
+                    {{# each items }}
+                        <h5>{{this.name}}</h5>
+                        <ul>
+                            <li>Auteur : {{this.author}}</li>
+                            <li>Date : {{this.date}}</li>
+                        </ul>
+                        <hr>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12"><h3>INSERT</h3></div>
+                    </div>
+                    <div class="row">
+                        <form action="/post-data" method="post">
+                            <div class="form-group">
+                                <div class="input">
+                                    <label for="title">Name</label>
+                                    <input class="form-control" type="text" id="title" name="name"
+                                           placeholder="Nom du document">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input">
+                                    <label for="author">Author</label>
+                                    <input class="form-control" type="text" id="author" name="author"
+                                           placeholder="Nom de l'auteur">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input">
+                                    <label for="date">Date</label>
+                                    <input class="form-control" type="text" id="date" name="date" placeholder="Date">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default">INSERT</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12"><h3>UPDATE</h3></div>
+                    </div>
+                    <div class="row">
+                        <form action="/update-data" method="post">
+                            <div class="form-group">
+                                <div class="input">
+                                    <label for="name">Name</label>
+                                    <input class="form-control" type="text" id="name" name="name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input">
+                                    <label for="author">Author</label>
+                                    <input class="form-control" type="text" id="author" name="author">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input">
+                                    <label for="date">Date</label>
+                                    <input class="form-control" type="text" id="date" name="date">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default">UPDATE</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="panel">
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-12"><h3>DELETE</h3></div>
+                    </div>
+                    <div class="row">
+                        <form action="/delete-data" method="post">
+                            <div class="form-group">
+                                <div class="input">
+                                    <label for="author">Author</label>
+                                    <input class="form-control" type="text" id="author" name="author">
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-default">DELETE</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
