@@ -6,17 +6,19 @@
     "build": "npm-run-all build:*",
     "build:css": "node-sass public/css/main.scss > public/css/main.css",
     "postinstall": "npm run build",
-    "start": "node server.js",
+    "start": "./node_modules/.bin/supervisor server.js",
     "test": "mocha",
     "watch": "npm-run-all --parallel watch:*",
     "watch:css": "nodemon -e scss -w public/css -x npm run build:css"
   },
   "dependencies": {
     "async": "^1.5.2",
+    "babel": "^5.4.7",
     "bcrypt-nodejs": "^0.0.3",
     "bluebird": "3.5.0",
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
+    "debug": "2.6.3",
     "dotenv": "^2.0.0",
     "express": "^4.13.4",
     "express-flash": "0.0.2",
@@ -35,14 +37,16 @@
     "passport-github": "^1.1.0",
     "passport-google-oauth": "^1.0.0",
     "passport-local": "^1.0.0",
-    "passport-twitter": "^1.0.4"
+    "passport-twitter": "^1.0.4",
+    "underscore": "1.8.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^2.4.5",
     "sinon": "^1.17.3",
     "sinon-chai": "^2.8.0",
-    "supertest": "^1.2.0"
+    "supertest": "^1.2.0",
+    "supervisor": "0.12.0"
   },
   "engines": {
     "node": "6.1.0"

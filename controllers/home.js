@@ -2,24 +2,17 @@
  * GET /
  */
 
-var Test = require('../models/Test');
-
-console.log('home.js');
+//var Test = require('../models/Test');
+const mongoDAO = require('../dao/mongoDAO');
 
 exports.index = function (req, res) {
     res.render('home',{title:"Home"});
 
 };
 
-exports.get_data = function(req, res){
-    Test.find(function(err,result){
-
-        if (err) throw err;
-
-        console.log("Result:");
-        console.log(result);
-        res.render('home',{title:"Home", items:result});
-    });
+exports.get_data = async(req, res) => {
+    const result = await mongoDAO.get();
+    res.render('home',{title:"Home", items:result});
 };
 
 /**

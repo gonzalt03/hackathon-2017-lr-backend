@@ -1,3 +1,4 @@
+require('babel/register');
 var express = require('express');
 var path = require('path');
 var logger = require('morgan');
@@ -12,8 +13,13 @@ var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var passport = require('passport');
 
+let morgan = require('morgan');
+
+
 // Load environment variables from .env file
 dotenv.load();
+
+let Config = require('./config/Config');
 
 // Controllers
 var HomeController = require('./controllers/home');
@@ -25,15 +31,14 @@ require('./config/passport');
 
 var app = express();
 
+mongoose.connect(Config.mongoLocal);
 
-mongoose.connect('mongodb://localhost/test');
-
-mongoose.connection.on('error', function () {
+mongoose.connection.on('error', ()=>{
     throw ('MongoDB Connection Error. Please make sure that MongoDB is running.');
     process.exit(1);
 });
 
-mongoose.connection.on('open', function () {
+mongoose.connection.on('open', ()=>{
     console.log('MongoDB Connection Success');
 });
 
@@ -52,16 +57,21 @@ var hbs = exphbs.create({
     }
 });
 
+/**
+ * FOR LOGS
+ */
+app.use(morgan('dev'));
+
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('port', process.env.PORT || 3000);
+app.set('port', Config.port);
 app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
-app.use(session({secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true}));
+app.use(session({secret: Config.secret, resave: true, saveUninitialized: true}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
@@ -70,6 +80,16 @@ app.use(function (req, res, next) {
     next();
 });
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+/**
+ * ALLOW CROSS ORIGIN
+ */
+app.all('/', (req,res,next)=>{
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+});
 
 app.get('/', HomeController.index);
 app.get('/contact', contactController.contactGet);
@@ -114,7 +134,7 @@ if (app.get('env') === 'production') {
     });
 }
 
-app.listen(app.get('port'), function () {
+app.listen(app.get('port'), ()=> {
     console.log('Express server listening on port ' + app.get('port'));
 });
 
