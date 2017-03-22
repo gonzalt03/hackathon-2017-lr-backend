@@ -15,3 +15,5 @@ const url = {
     "sta_place_pmr": opendata + key + "&db=stationnement&table=sta_place_pmr" + format
 
 };
+
+export default url;

@@ -93,7 +93,7 @@ app.all('/', (req,res,next)=>{
 
 app.get('/', HomeController.index);
 
-app.post('/get-data',HomeController.get_data);
+app.get('/get-data',HomeController.get_data);
 app.post('/post-data',HomeController.post_data);
 app.post('/update-data',HomeController.update_data);
 app.post('/delete-data',HomeController.delete_data);
