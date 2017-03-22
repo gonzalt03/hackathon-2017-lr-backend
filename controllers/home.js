@@ -12,8 +12,8 @@ exports.index = function (req, res) {
 };
 
 exports.get_data = async(req, res) => {
-    const result = await openDataDAO.get();
-    res.render('home',{title:"Home", items:result.opendata.answer.data});
+    const result = await openDataDAO.get(req.body.url);
+    res.render('home',{title:"Home", items:result.opendata.answer.status});
 };
 
 /**

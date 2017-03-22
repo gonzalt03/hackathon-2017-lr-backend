@@ -19,13 +19,12 @@ let morgan = require('morgan');
 // Load environment variables from .env file
 dotenv.load();
 
-let Config = require('./config/Config');
+const Config = require('./config/Config');
 
 // Controllers
 var HomeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
-var refreshController = require('./controllers/refresh');
 
 // Passport OAuth strategies
 require('./config/passport');
@@ -94,11 +93,10 @@ app.all('/', (req,res,next)=>{
 
 app.get('/', HomeController.index);
 
-app.get('/get-data',HomeController.get_data);
+app.post('/get-data',HomeController.get_data);
 app.post('/post-data',HomeController.post_data);
 app.post('/update-data',HomeController.update_data);
 app.post('/delete-data',HomeController.delete_data);
-app.get('/refresh',refreshController.refresh);
 
 // Production error handler
 if (app.get('env') === 'production') {
