@@ -12,7 +12,6 @@ var dotenv = require('dotenv');
 var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var passport = require('passport');
-var requestGet = require('./request/request');
 
 let morgan = require('morgan');
 
@@ -26,9 +25,7 @@ let Config = require('./config/Config');
 var HomeController = require('./controllers/home');
 var userController = require('./controllers/user');
 var contactController = require('./controllers/contact');
-
-// Request start
-requestGet.requestGet("https://opendata.larochelle.fr/webservice/?service=getData&key=RCX5bwVyOwITdtzj&db=stationnement&table=disponibilite_parking&format=json");
+var refreshController = require('./controllers/refresh');
 
 // Passport OAuth strategies
 require('./config/passport');
@@ -101,6 +98,7 @@ app.get('/get-data',HomeController.get_data);
 app.post('/post-data',HomeController.post_data);
 app.post('/update-data',HomeController.update_data);
 app.post('/delete-data',HomeController.delete_data);
+app.get('/refresh',refreshController.refresh);
 
 // Production error handler
 if (app.get('env') === 'production') {

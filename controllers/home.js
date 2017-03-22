@@ -21,7 +21,7 @@ exports.get_data = async(req, res) => {
 exports.post_data = function(req,res){
 
     console.log("post_data");
-    var date=new Date()
+    var date=new Date();
     var item = {
         name: req.body.name,
         date: date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear(),
@@ -65,7 +65,6 @@ exports.delete_data = function(req,res){
             console.log('No user found');
         }
     });
-
 
     res.redirect('/');
     //TODO message de confirmation de delete
