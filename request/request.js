@@ -1,11 +1,22 @@
-var request = require('request');
+const request = require('request');
 
-exports.requestGet = function(url) {
-    request(url, function (error, response, body) {
-        console.log('error:', error); // Print the error if one occurred
-        console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received
-        console.log(body);
-        return body;
-    });
+const Utils = {
+    requestGet: function (url) {
+        return new Promise(function (resolve, reject) {
+            request(url, function callback(err, response, body) {
+                if(err) {
+                    console.error(err);
+                    reject(err);
+                }
+                if (!response) {
+                    resolve(null);
+                } else {
+                    //console.log(body);
+                    resolve(body);
+                }
+            });
+        });
+    }
 };
 
+export default Utils;

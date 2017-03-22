@@ -29,15 +29,11 @@
                         <div class="col-sm-3 col-sm-offset-1"><a href="/get-data" role="button" class="btn btn-default">Get
                             datas</a></div>
                     </div>
-                    {{# each items }}
-                        <h5>{{this.name}}</h5>
-                        <ul>
-                            <li>Mail : {{this.mail}}</li>
-                            <li>Date : {{this.date}}</li>
-                            <li>Commentaire : {{this.value}}</li>
-                        </ul>
-                        <hr>
-                    {{/each}}
+                    <ul>
+                        {{# each items }}
+                            <li>{{this.dp_id}}</li>
+                        {{/each}}
+                    </ul>
                 </div>
             </div>
         </div>
@@ -66,7 +62,8 @@
                             <div class="form-group">
                                 <div class="input">
                                     <label for="value">Commentaire</label>
-                                    <input class="form-control" type="text" id="value" name="value" placeholder="Commentaire">
+                                    <input class="form-control" type="text" id="value" name="value"
+                                           placeholder="Commentaire">
                                 </div>
                             </div>
                             <button type="submit" class="btn btn-default">INSERT</button>

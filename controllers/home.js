@@ -2,8 +2,9 @@
  * GET /
  */
 
-var Commentaire = require('../models/Commentaire');
+const Commentaire = require('../models/Commentaire');
 const mongoDAO = require('../dao/mongoDAO');
+const openDataDAO = require('../dao/openDataDAO');
 
 exports.index = function (req, res) {
     res.render('home',{title:"Home"});
@@ -11,8 +12,8 @@ exports.index = function (req, res) {
 };
 
 exports.get_data = async(req, res) => {
-    const result = await mongoDAO.get();
-    res.render('home',{title:"Home", items:result});
+    const result = await openDataDAO.get();
+    res.render('home',{title:"Home", items:result.opendata.answer.data});
 };
 
 /**

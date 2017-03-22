@@ -2,9 +2,11 @@
  * GET /
  */
 
-var DataObject = require('../models/DataObject');
-var OpenDataObject = require('../models/OpenDataObject');
+const DataObject = require('../models/DataObject');
+const OpenDataObject = require('../models/OpenDataObject');
 const mongoDAO = require('../dao/mongoDAO');
+const requestGet = require('../request/request');
+
 
 /**
  * REFRESH /
@@ -13,19 +15,19 @@ exports.refresh = function(req,res){
 
     console.log("refresh");
 
-    var requestGet = require('../request/request');
-
     // Request start
-    requestGet.requestGet("https://opendata.larochelle.fr/webservice/?service=getData&key=RCX5bwVyOwITdtzj&db=stationnement&table=disponibilite_parking&format=json");
+    const result =  requestGet.requestGet("https://opendata.larochelle.fr/webservice/?service=getData&key=RCX5bwVyOwITdtzj&db=stationnement&table=disponibilite_parking&format=json");
 
 
-    var date=new Date();
-    var item = {
-        values : req.body,
-        update_date: new Date().getTime()
+    const date=new Date();
+
+    const item = {
+        values : result,
+        update_date: date.getTime()
     };
 
-    var data = new DataObject(item);
+    const data = new DataObject(item);
+
     data.save();
 
     res.redirect('/');
