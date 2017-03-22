@@ -10,4 +10,4 @@ module.exports = mongoose.model('opendatavalues', new Schema({
     values: [],
     update_date: String
 
-}, {collection: 'open-data-values'}));;
+}, {collection: 'open-data-values'}));

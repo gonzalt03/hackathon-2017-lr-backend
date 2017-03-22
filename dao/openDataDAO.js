@@ -12,8 +12,8 @@ const openDataDAO = {
     /**
      *  GET DATA
      */
-    get: async() => {
-        const result =  await Utils.requestGet("https://opendata.larochelle.fr/webservice/?service=getData&key=RCX5bwVyOwITdtzj&db=stationnement&table=disponibilite_parking&format=json");
+    get: async(url) => {
+        const result =  await Utils.requestGet(url);
         const d = JSON.parse(result);
 
         const date=new Date();

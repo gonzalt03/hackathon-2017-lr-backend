@@ -11,7 +11,6 @@ const Utils = {
                 if (!response) {
                     resolve(null);
                 } else {
-                    //console.log(body);
                     resolve(body);
                 }
             });
