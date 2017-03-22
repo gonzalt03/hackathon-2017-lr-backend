@@ -3,15 +3,15 @@
  */
 'use strict';
 
-let Test = require('../models/Test');
+let Commentaire = require('../models/Commentaire');
 
 const mongoDAO = {
 
     /**
      *  GET DATA
      */
-    get : async() => {
-        return await Test.find((err, doc) => {
+    get: async() => {
+        return await Commentaire.find((err, doc) => {
             if (err) throw err;
             return doc
         });

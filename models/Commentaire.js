@@ -7,12 +7,13 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 //TODO adapter schema pour le stockage des données OPENDATA (plus ajout de methode perso pour reformater)
-var testSchema = new Schema({
+var commentaireSchema = new Schema({
     name: String,
     date: String,
-    author: String
-},{ collection: 'myCollection' });
+    mail: String,
+    value: String
+}, {collection: 'myCollection'});
 
-var Test = mongoose.model('test', testSchema);
+var Commentaire = mongoose.model('commentaire', commentaireSchema);
 
-module.exports = Test;
+module.exports = Commentaire;

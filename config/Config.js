@@ -7,7 +7,7 @@ const Config = {
     port : process.env.PORT || 3000,
 
     host: 'localhost',
-    database: 'test',
+    database: 'commentaires',
 
     mongoLocal: process.env.MONGODB_LOCAL || `mongodb://${this.host}/${this.database}`,
 

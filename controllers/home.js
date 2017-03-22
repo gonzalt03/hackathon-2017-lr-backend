@@ -2,7 +2,7 @@
  * GET /
  */
 
-//var Test = require('../models/Test');
+var Commentaire = require('../models/Commentaire');
 const mongoDAO = require('../dao/mongoDAO');
 
 exports.index = function (req, res) {
@@ -21,13 +21,15 @@ exports.get_data = async(req, res) => {
 exports.post_data = function(req,res){
 
     console.log("post_data");
+    var date=new Date()
     var item = {
         name: req.body.name,
-        date: req.body.date,
-        author: req.body.author
+        date: date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear(),
+        mail: req.body.mail,
+        value: req.body.value
     };
 
-    var data = new Test(item);
+    var data = new Commentaire(item);
     data.save();
 
     res.redirect('/');
@@ -40,21 +42,22 @@ exports.post_data = function(req,res){
  * UPDATE /
  */
 exports.update_data = function(req,res){
-    Test.findOne({name: req.body.name}, function(err, doc) {
+    Commentaire.findOne({name: req.body.name}, function(err, doc) {
         if (err) {
             console.error('error, no entry found');
         }
         doc.content = req.body.content;
-        doc.author = req.body.author;
+        doc.mail = req.body.mail;
+        doc.value =  req.body.value;
         doc.save();
-    })
+    });
     res.redirect('/');
     //TODO message de confirmation d'update
 };
 
 exports.delete_data = function(req,res){
 
-    Test.findOneAndRemove({author: req.body.author}, function(err,doc) {
+    Commentaire.findOneAndRemove({mail: req.body.mail}, function(err, doc) {
         if (err) throw err;
         if(doc){
             console.log('Doc found and removed');
