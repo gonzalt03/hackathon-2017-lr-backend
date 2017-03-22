@@ -19,6 +19,14 @@ exports.get_data = async(req, res) => {
     res.render('home',{title:"Home", items:result.opendata.answer.status});
 };
 
+
+exports.api_get_data = async(req, res) => {
+    const request = req.query.url;
+    const result = await openDataDAO.get(url[request]);
+    res.send(result.opendata.answer.data);
+};
+
+
 /**
  * POST /
  */
