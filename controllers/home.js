@@ -22,11 +22,11 @@ exports.get_data = async(req, res) => {
 exports.get_id = async(req, res) => {
     const request = req.query.tag;
     let number = req.query.limit;
-    if(number<0)
+    if (number < 0)
         number = 10000;
     let result = [];
 
-    for (let props=0; props < metadata.length & result.length<number; props++ ) {
+    for (let props = 0; props < metadata.length & result.length < number; props++) {
         console.log(metadata[props].identifier);
         if ((String(metadata[props].tags).toLowerCase()).includes(request.toLowerCase())) {
             result.push(metadata[props])
@@ -37,8 +37,8 @@ exports.get_id = async(req, res) => {
 
 exports.api_get_metadata = async(req, res) => {
     const request = req.query.id;
-    let result=[]
-    for (let props=0; props < metadata.length & result.length<1; props++ ) {
+    let result = [];
+    for (let props = 0; props < metadata.length & result.length < 1; props++) {
         console.log(metadata[props].identifier);
         if ((String(metadata[props].identifier).toLowerCase()).includes(request.toLowerCase())) {
             result.push(metadata[props])
@@ -53,6 +53,9 @@ exports.api_get_data = async(req, res) => {
     res.send(result.opendata.answer.data);
 };
 
+exports.get_all = async(req, res) => {
+    res.send(metadata);
+};
 
 /**
  * POST /
