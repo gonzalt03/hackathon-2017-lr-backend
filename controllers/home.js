@@ -7,6 +7,7 @@ const mongoDAO = require('../dao/mongoDAO');
 const openDataDAO = require('../dao/openDataDAO');
 const url = require('../models/url');
 const tag = require('../models/tag');
+const metadata =require('../models/metadata.json');
 
 exports.index = function (req, res) {
     res.render('home',{title:"Home"});
@@ -26,7 +27,11 @@ exports.get_id = async(req, res) => {
 
     for(let props in tag){
         if((String(tag[props]).toLowerCase()).includes(request.toLowerCase())){
-            result.push(props);
+            for (var i = 0; i < metadata.length; i++){
+                if (metadata[i].identifier == props){
+                    result.push(metadata[i])
+                }
+            }
         }
     }
     res.send(result)
@@ -53,13 +58,10 @@ exports.post_data = function(req,res){
         mail: req.body.mail,
         value: req.body.value
     };
-
     var data = new Commentaire(item);
     data.save();
 
     res.redirect('/');
-
-    //TODO message de confirmation comme quoi la donnée a été insérée
 };
 
 
@@ -77,7 +79,6 @@ exports.update_data = function(req,res){
         doc.save();
     });
     res.redirect('/');
-    //TODO message de confirmation d'update
 };
 
 exports.delete_data = function(req,res){
@@ -90,7 +91,5 @@ exports.delete_data = function(req,res){
             console.log('No user found');
         }
     });
-
     res.redirect('/');
-    //TODO message de confirmation de delete
 };
