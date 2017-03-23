@@ -22,10 +22,12 @@ exports.get_data = async(req, res) => {
 
 exports.get_id = async(req, res) => {
     const request = req.query.tag;
-
+    let number = req.query.limit;
+    if(number<0)
+        number = 10000;
     let result = [];
 
-    for (let props in metadata) {
+    for (let props=0; props < metadata.length & result.length<number; props++ ) {
         console.log(metadata[props].identifier);
         if ((String(metadata[props].tags).toLowerCase()).includes(request.toLowerCase())) {
             result.push(metadata[props])
