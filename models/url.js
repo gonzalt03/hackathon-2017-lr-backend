@@ -10,6 +10,8 @@ const url = {
 
     "scolaire_etablissement": opendata + key + "&db=scolaire&table=scolaire_etablissement" + format,
 
+    "nb_enfants": opendata + key + "&db=scolaire&table=scolaire_00" + format,
+
     "bp_2017_fonction": opendata + key + "&db=budget&table=bp_2017_fonction" + format,
 
     "sta_place_pmr": opendata + key + "&db=stationnement&table=sta_place_pmr" + format
