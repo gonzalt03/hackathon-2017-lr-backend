@@ -6,6 +6,7 @@ const Commentaire = require('../models/Commentaire');
 const mongoDAO = require('../dao/mongoDAO');
 const openDataDAO = require('../dao/openDataDAO');
 const url = require('../models/url');
+const tag = require('../models/tag');
 
 exports.index = function (req, res) {
     res.render('home',{title:"Home"});
@@ -17,6 +18,20 @@ exports.get_data = async(req, res) => {
 
     const result = await openDataDAO.get(url[request]);
     res.render('home',{title:"Home", items:result.opendata.answer.status});
+};
+
+exports.get_id = async(req, res) => {
+    const request = req.query.tag;
+    console.log(request)
+    let result=[];
+
+    for(let props in tag){
+        if((String(tag[props]).toLowerCase()).includes(request.toLowerCase())){
+            result.push(props);
+        }
+    }
+    console.log(result)
+    res.send(request)
 };
 
 

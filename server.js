@@ -94,6 +94,8 @@ app.all('/', (req,res,next)=>{
 app.get('/', HomeController.index);
 
 app.get('/get-data',HomeController.get_data);
+app.get('/get-id',HomeController.get_id);
+
 app.get('/api-get-data',HomeController.api_get_data);
 app.post('/post-data',HomeController.post_data);
 app.post('/update-data',HomeController.update_data);
