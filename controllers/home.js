@@ -22,7 +22,7 @@ exports.get_data = async(req, res) => {
 
 exports.get_id = async(req, res) => {
     const request = req.query.tag;
-    console.log(request)
+    console.log(request);
     let result=[];
 
     for(let props in tag){
@@ -30,8 +30,7 @@ exports.get_id = async(req, res) => {
             result.push(props);
         }
     }
-    console.log(result)
-    res.send(request)
+    res.send(result)
 };
 
 
