@@ -12,7 +12,6 @@ const metadata = require('../models/metadata.json');
 exports.index = function (req, res) {
     res.render('home', {title: "Home"});
 };
-
 exports.get_data = async(req, res) => {
     const request = req.query.url;
 
@@ -34,9 +33,19 @@ exports.get_id = async(req, res) => {
         }
     }
     res.send(result)
-}
-;
+};
 
+exports.api_get_metadata = async(req, res) => {
+    const request = req.query.id;
+    let result=[]
+    for (let props=0; props < metadata.length & result.length<1; props++ ) {
+        console.log(metadata[props].identifier);
+        if ((String(metadata[props].identifier).toLowerCase()).includes(request.toLowerCase())) {
+            result.push(metadata[props])
+        }
+    }
+    res.send(result)
+};
 
 exports.api_get_data = async(req, res) => {
     const request = req.query.url;

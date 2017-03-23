@@ -97,6 +97,7 @@ app.get('/get-data',HomeController.get_data);
 app.get('/get-id',HomeController.get_id);
 
 app.get('/api-get-data',HomeController.api_get_data);
+app.get('/api-get-metadata',HomeController.api_get_metadata);
 app.post('/post-data',HomeController.post_data);
 app.post('/update-data',HomeController.update_data);
 app.post('/delete-data',HomeController.delete_data);
