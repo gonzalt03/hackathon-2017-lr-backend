@@ -10,7 +10,6 @@ const tag = require('../models/tag');
 
 exports.index = function (req, res) {
     res.render('home',{title:"Home"});
-
 };
 
 exports.get_data = async(req, res) => {
