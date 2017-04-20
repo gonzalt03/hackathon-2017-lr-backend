@@ -1,0 +1,26 @@
+[
+  {
+    "identifier": "test",
+    "landingPage": "http://link.fr/signalisation-lumineuse-support/",
+    "publication": "21/03/2017 15:42:00",
+    "modified": "21/03/2017 15:42:00",
+    "temporal": "",
+    "description": "Description ...)",
+    "licence": "LO/OL",
+    "frequency": "Quotidienne",
+    "categorie": "Espace Public",
+    "subcategorie": "Eclairage public",
+    "inspire": "",
+    "tags": "Feu tricolore signalisation lumineuse rouge vert orange",
+    "property": "PROPRIETY",
+    "producer": "VLR - Eclairage public et signalisation lumineuse",
+    "diffuser": "",
+    "language": "Français",
+    "geo_spacial": "La Rochelle",
+    "geo_data": "Oui",
+    "geo_coordinate": "Lambert 93",
+    "geo_scale": "",
+    "webservice": "URL",
+    "morepage": ""
+  }
+]
