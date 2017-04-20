@@ -2,7 +2,7 @@
  * Created by jcalandr on 22/03/2017.
  */
 const opendata = "https://opendata.larochelle.fr/webservice/?service=getData";
-const key = "&key=RCX5bwVyOwITdtzj";
+const key = "&key=KEY";
 const format = "&format=json";
 
 const url = {
